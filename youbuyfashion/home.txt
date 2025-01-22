@@ -1,0 +1,289 @@
+<?php
+session_start();
+require "connection.php";
+if (isset($_SESSION["u"])) {
+  $user = $_SESSION["u"]["email"];
+}
+
+
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="shortcut icon" href="resources/icon.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Audiowide&family=Belanosima&family=Dosis:wght@200&family=Kaisei+Tokumin&family=Mukta:wght@200&family=Poppins:wght@200&family=Righteous&family=Wellfleet&family=Ysabeau+Infant:wght@200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Audiowide&family=Belanosima&family=Kaisei+Tokumin&family=Poppins:wght@200&family=Wellfleet&family=Ysabeau+Infant:wght@200&display=swap" rel="stylesheet">
+  <title>YouBuy Fashion | Home</title>
+</head>
+
+<body style="position: relative;" data-spy="scroll" data-target="#scrollnavbar">
+
+
+
+  <div class="container-fluid bg-light">
+    <div class="row">
+
+      <?php include "header.php"; ?>
+
+
+      <div data-spy="scroll" data-target="#scrollnavbar" data-offset="0">
+
+        <hr><br>
+
+        <div id="home">
+          <div class="col-12 justify-content-center mt-5">
+            <div class="row col-lg-12">
+
+              <div class="col-9 col-lg-5 offset-lg-3">
+
+                <div class="input-group mb-3  col-12">
+                  <input type="text" class="form-control col-8" aria-label="Text input with dropdown button">
+                  <select class="form-select col-4" id="c" style="max-width: 250px;">
+                    <option value="0"> Categories</option>
+
+                    <?php
+
+                    $category_rs = Database::search("SELECT * FROM `category`");
+                    $category_num = $category_rs->num_rows;
+
+                    for ($x = 0; $x < $category_num; $x++) {
+
+                      $category_data = $category_rs->fetch_assoc();
+
+                    ?>
+
+                      <option value="<?php echo $category_data["cat_id"]; ?>">
+                        <?php echo $category_data["cat_name"]; ?>
+                      </option>
+
+                    <?php
+
+                    }
+
+                    ?>
+
+                  </select>
+
+                  <ul class="dropdown-menu dropdown-menu-end">
+
+                  </ul>
+
+                </div>
+
+              </div>
+              <div class="col-1"><button class="btn btn-dark text-white"><i class="bi bi-search"></i></button></div>
+              <div class="col-12 col-lg-2 text-center"><a href="#" class="text-decoration-none link-danger fw-bold ">Advanced</a></div>
+
+            </div>
+          </div>
+
+
+          <!-- carousel -->
+
+          <div class="col-12 col-lg-12 bg-light">
+            <div class="">
+
+              <div id="carouselExampleFade" class="carousel col-12 slide carousel-fade " data-bs-ride="carousel">
+                <div class="carousel-inner">
+
+                  <div class="carousel-item active">
+                    <img src="resources/bg6.jpg" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="resources/bg2.jpg" class="d-block w-100" alt="...">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="resources/crsl.png" class="d-block w-100" alt="...">
+                  </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+              <br><br>
+              <hr class="mt-5">
+
+              <!-- carousel -->
+
+            </div>
+            <!-- blogs -->
+            <div id="blogs" class="mt-5 text-center">
+              <span class="text-center mt-5 mb-3 fs-1" style="font-family: Georgia, 'Times New Roman', Times, serif;">Blogs</span>
+
+              <div class="row justify-content-center p-3 mb-3">
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg4.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">Fashion Essentials: Must-Have Items for Every Wardrobe</h5>
+                      <p class="card-text text-center">Discover versatile fashion essentials like the white button-down, little black dress, and classic jeans on our app, creating endless stylish possibilities.</p>
+                    </div>
+                  </div>
+                </div><br>
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg10.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">Fashion Forward: The Evolution of Sustainable Fashion</h5>
+                      <p class="card-text text-center">Join the sustainable fashion movement through our app, finding eco-friendly options, ethical brands, and tips to make a positive impact on the environment.</p>
+                    </div>
+                  </div>
+                </div><br>
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg7.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">Unlocking Style: How to Find Your Personal Fashion Identity</h5>
+                      <p class="card-text text-center">Unearth your unique style through our app's diverse fashion options, tools for wardrobe curation, and inspirational user stories.</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div><br>
+              <div class="row justify-content-center p-3 mb-3">
+
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg11.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">The Art of Wardrobe Remix: Creating Fresh Looks with Existing Pieces</h5>
+                      <p class="card-text text-center">Elevate your style game by learning the art of wardrobe remix. Discover how to breathe new life into your existing pieces and create fresh, unique looks that reflect your personal style using our fashion shopping web app's versatile options and styling tips.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg8.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">Fashion on a Budget: Stylish Choices That Won't Break the Bank</h5>
+                      <p class="card-text text-center">Style doesn't have to come at a high cost. Explore affordable yet trendy fashion choices on our app, where you can curate a budget-friendly wardrobe that exudes style and confidence.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-3 mb-3 mx-5">
+                  <div class="card" style="width: 25rem;">
+                    <img src="resources/bg9.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="text-center fw-bold">Fashion for All: Inclusivity and Diversity in the Fashion World</h5>
+                      <p class="card-text text-center">Celebrate diversity and inclusivity in fashion with our app's wide range of styles, sizes, and designers. Discover how fashion empowers individuals to express their unique identities and celebrate their authentic selves.</p>
+                    </div>
+                  </div>
+                </div>
+                <br>
+              </div>
+            </div>
+            <hr>
+            <!-- blogs -->
+
+
+            <div class="col-12 fw-bold fs-2  mt-5 mb-5 text-center"><a class="newtxt text-decoration-none fw-bold text-dark text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">New arrivals</a></div>
+
+
+
+
+            <!-- products -->
+
+            <div class="col-12 mb-3" id="newarrivals">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row justify-content-center gap-5">
+
+                    <?php
+
+                    $product_rs = Database::search("SELECT * FROM `product` WHERE 
+                                `status_status_id`='1' ORDER BY `datetime_added` DESC LIMIT 20 OFFSET 0");
+
+                    $product_num = $product_rs->num_rows;
+
+                    for ($x = 0; $x < $product_num; $x++) {
+                      $product_data = $product_rs->fetch_assoc();
+
+                    ?>
+
+                      <div class="card col-12 col-lg-2 mt-2 mb-2 mx-2 p-3" style="width: 20rem;">
+                        <?php
+
+                        $img_rs = Database::search("SELECT * FROM `product_img` WHERE 
+                                            `product_id`='" . $product_data['id'] . "'");
+
+                        $img_data = $img_rs->fetch_assoc();
+
+                        ?>
+                        <a href="<?php echo "singleProductView.php?id=" . ($product_data["id"]); ?>">
+                          <img id="zoomButton" src="<?php echo $img_data["img_path"]; ?> " class="card-img" alt="...">
+                        </a>
+                        <div class="card-body">
+
+                          <span class="card-text text-danger">LKR <span class="fs-3 fw-bold"><?php echo $product_data["price"]; ?></span> .00</span><br />
+                          <h5 class="card-title fw-bold"><?php echo $product_data["title"] ?></h5>
+                          <div class="row justify-content-center p-3">
+                            <span class="badge  col-3 text-bg-warning">Choice</span><br />
+                            <span class="badge rounded-pill col-2 text-bg-danger">New</span><br />
+                          </div>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <div class="row justify-content-center">
+
+                          </div>
+                        </div>
+                        <button class=" col-12  btn-cart" onclick="addToCart(<?php echo $product_data['id']; ?>);">Add to Cart</button>
+                        <hr>
+                        <button class=" col-12 btn btn-dark" onclick="addToWatchlist(<?php echo $product_data['id']; ?>);">Add to Watchlist</button>
+                      </div>
+
+
+
+                    <?php
+                    }
+
+                    ?>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+            <!-- products      -->
+
+            <!-- About us -->
+            <!-- About us -->
+
+
+          </div>
+        </div>
+      </div>
+
+      <?php include "footer.php" ?>
+
+
+
+    </div>
+
+  </div>
+  
+  <script src="script.js"></script>
+  <script src="bootstrap.js"></script>
+</body>
+
+</html>
