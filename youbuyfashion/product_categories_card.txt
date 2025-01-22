@@ -1,0 +1,86 @@
+<?php
+
+          $c_rs = Database::search("SELECT * FROM `category`");
+          $c_num = $c_rs->num_rows;
+
+          for ($y = 0; $y < $c_num; $y++) {
+
+            $c_data = $c_rs->fetch_assoc();
+
+          ?>
+
+            <!-- category names -->
+            <div class="col-12 offset-lg-5 col-lg-3 mt-4 mb-5">
+              <a href="#" class="text-decoration-none text-dark fs-3 fw-bold text-center">
+                <?php echo $c_data["cat_name"]; ?>
+              </a>&nbsp;&nbsp;
+              <a href="#" class="text-decoration-none text-dark fs-6">See All &nbsp;&rarr;</a>
+            </div>
+            <!-- category names -->
+            <!-- products -->
+
+            <div class="col-12 mb-3">
+              <div class="row">
+                <div class="col-12">
+                  <div class="row justify-content-center gap-5">
+
+                    <?php
+
+                    $product_rs = Database::search("SELECT * FROM `product` WHERE `category_cat_id`='" . $c_data["cat_id"] . "' AND 
+                                `status_status_id`='1' ORDER BY `datetime_added` DESC LIMIT 4 OFFSET 0");
+
+                    $product_num = $product_rs->num_rows;
+
+                    for ($x = 0; $x < $product_num; $x++) {
+                      $product_data = $product_rs->fetch_assoc();
+
+                    ?>
+
+                      <div class="card col-12 col-lg-2 mt-2 mb-2 p-3" style="width: 18rem;">
+                        <?php
+
+                        $img_rs = Database::search("SELECT * FROM `product_img` WHERE 
+                                            `product_id`='" . $product_data['id'] . "'");
+
+                        $img_data = $img_rs->fetch_assoc();
+
+                        ?>
+                        <a href="">
+                          <img src="<?php echo $img_data["img_path"]; ?> " class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body">
+
+                          <span class="card-text text-danger">LKR <span class="fs-3 fw-bold"><?php echo $product_data["price"]; ?></span> .00</span><br />
+                          <h5 class="card-title fw-bold"><?php echo $product_data["title"] ?></h5>
+                          <div class="row justify-content-center">
+                            <span class="badge  col-3 text-bg-warning">Choice</span><br />
+                            <span class="badge rounded-pill col-2 text-bg-danger">New</span><br />
+                          </div>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <div class="row justify-content-center">
+                            
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    <?php
+                    }
+
+                    ?>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+            <!-- products      -->
+            
+          <?php
+
+          }
+
+          ?>
